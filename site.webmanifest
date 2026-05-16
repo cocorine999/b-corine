@@ -1,0 +1,15 @@
+{
+  "name": "Corine D. BOCOGA Portfolio",
+  "short_name": "Corine",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08101f",
+  "theme_color": "#08101f",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
