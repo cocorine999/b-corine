@@ -1391,6 +1391,7 @@ document.addEventListener('keydown', function(e) {
 // ══════════════════════════════
 // CV BUILDER
 // ══════════════════════════════
+/*__CV_DATA_START__*/
 const DEFAULT_CV = {
   name:'Corine D. BOCOGA',
   title:'Software Engineer | Full Stack . Mobile Developer · DevOps',
@@ -1421,6 +1422,7 @@ const DEFAULT_CV = {
     {school:'Lycée Technique Coulibaly · Cotonou',degree:'DT — Installation & Maintenance Informatique',year:'2013 — 2016'},
   ]
 };
+/*__CV_DATA_END__*/
 
 let cvData = JSON.parse(JSON.stringify(DEFAULT_CV));
 
@@ -2290,7 +2292,7 @@ window.closeProject = closeProject;
     </div>
     <div>
       <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8b949e;display:block;margin-bottom:.35rem">Repository</label>
-      <input id="gh-repo" type="text" placeholder="cocorine999/portfolio" value="cocorine999/portfolio" style="width:100%;background:#010409;border:1px solid rgba(240,246,252,.15);border-radius:5px;color:#f0f6fc;font-family:'JetBrains Mono',monospace;font-size:.8rem;padding:.55rem .75rem;outline:none;box-sizing:border-box">
+      <input id="gh-repo" type="text" placeholder="cocorine999/b-corine" value="cocorine999/b-corine" style="width:100%;background:#010409;border:1px solid rgba(240,246,252,.15);border-radius:5px;color:#f0f6fc;font-family:'JetBrains Mono',monospace;font-size:.8rem;padding:.55rem .75rem;outline:none;box-sizing:border-box">
     </div>
     <div>
       <label style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8b949e;display:block;margin-bottom:.35rem">Chemin du fichier</label>
@@ -2476,25 +2478,33 @@ function uploadToGithub() {
         var body={message:message,content:base64};
         if(res.ok&&res.data&&res.data.sha)body.sha=res.data.sha;
         ghXHR('PUT',apiUrl,body,function(err2,res2){
-          if(err2){setGhStatus('✗ '+err2.message,'error');}
+          if(err2){setGhStatus('✗ '+err2.message,'error');btn.disabled=false;btn.textContent='⬆ Uploader le CV';}
           else if(res2.ok){
             var publicUrl = currentGhUrl();
             saveGhPrefs();
             setCvUrl(publicUrl, true);   // appliqué + mémorisé (survit au refresh)
-            btn.textContent='✓ Uploadé!';
-            var snippet = "url: '" + publicUrl + "',";
-            var el = document.getElementById('gh-status');
-            el.style.display='block';
-            el.style.background='rgba(35,134,54,.15)';
-            el.style.border='1px solid rgba(35,134,54,.3)';
-            el.style.color='#3fb950';
-            el.innerHTML =
-              '<div style="margin-bottom:.5rem">&#10003; CV upload&eacute; &mdash; lien appliqu&eacute; et m&eacute;moris&eacute; sur ce navigateur.</div>' +
-              '<div style="font-size:10.5px;color:#8b949e;margin-bottom:.35rem">Pour le rendre permanent pour tous les visiteurs, colle cette ligne dans <code>CV_LINK</code> :</div>' +
-              '<code id="gh-snippet" style="display:block;background:#010409;border:1px solid rgba(240,246,252,.12);border-radius:4px;padding:.5rem;color:#79c0ff;font-size:10.5px;word-break:break-all">' +
-              snippet.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</code>' +
-              '<button onclick="copyGhSnippet()" style="margin-top:.5rem;background:#21262d;color:#f0f6fc;border:1px solid rgba(240,246,252,.15);border-radius:4px;padding:.35rem .7rem;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;cursor:pointer">&#128203; Copier la ligne</button>';
-            setTimeout(function(){btn.disabled=false;btn.textContent='⬆ Uploader le CV';},3000);
+            setGhStatus('✓ PDF uploadé — mise à jour du site (index.html)...','info');
+            btn.textContent='⏳ Mise à jour du site...';
+            uploadIndexHtml(repo,authHeader,ghXHR,function(errHtml,htmlCommitUrl){
+              var el = document.getElementById('gh-status');
+              var snippet = "url: '" + publicUrl + "',";
+              var htmlNote = errHtml
+                ? '<div style="margin-top:.5rem;color:#ff7b72">⚠ index.html non mis à jour : '+ (errHtml.message||'').replace(/</g,'&lt;') +'</div>'
+                : '<div style="margin-top:.5rem;color:#3fb950">✓ index.html mis à jour avec ces données CV (commit poussé).</div>';
+              el.style.display='block';
+              el.style.background='rgba(35,134,54,.15)';
+              el.style.border='1px solid rgba(35,134,54,.3)';
+              el.style.color='#3fb950';
+              el.innerHTML =
+                '<div style="margin-bottom:.5rem">&#10003; PDF upload&eacute; &mdash; lien appliqu&eacute; et m&eacute;moris&eacute; sur ce navigateur.</div>' +
+                htmlNote +
+                '<div style="font-size:10.5px;color:#8b949e;margin:.5rem 0 .35rem">Pour le rendre permanent pour tous les visiteurs, colle cette ligne dans <code>CV_LINK</code> :</div>' +
+                '<code id="gh-snippet" style="display:block;background:#010409;border:1px solid rgba(240,246,252,.12);border-radius:4px;padding:.5rem;color:#79c0ff;font-size:10.5px;word-break:break-all">' +
+                snippet.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</code>' +
+                '<button onclick="copyGhSnippet()" style="margin-top:.5rem;background:#21262d;color:#f0f6fc;border:1px solid rgba(240,246,252,.15);border-radius:4px;padding:.35rem .7rem;font-family:\'JetBrains Mono\',monospace;font-size:10.5px;cursor:pointer">&#128203; Copier la ligne</button>';
+              btn.textContent='✓ Uploadé!';
+              setTimeout(function(){btn.disabled=false;btn.textContent='⬆ Uploader le CV';},3000);
+            });
           } else {
             var msg=res2.data&&res2.data.message?res2.data.message:'Erreur '+res2.status;
             if(res2.status===401)msg='Token invalide ou expiré';
@@ -2511,6 +2521,47 @@ function uploadToGithub() {
     });
   }
   doUpload();
+}
+
+/* Pousse aussi index.html sur le même repo, avec les données du CV
+   (cvData, telles qu'éditées dans le CV Builder) réinjectées à la
+   place de DEFAULT_CV, entre les marqueurs __CV_DATA_START__/END__.
+   Ainsi le site reste synchronisé avec le PDF pour tous les visiteurs,
+   pas seulement dans le navigateur de la personne qui a uploadé. */
+function uploadIndexHtml(repo,authHeader,ghXHR,cb){
+  collectData();
+  var htmlPath='index.html';
+  var htmlApiUrl='https://api.github.com/repos/'+repo+'/contents/'+htmlPath;
+  fetch(location.pathname+location.search, {cache:'no-store'})
+    .then(function(r){
+      if(!r.ok) throw new Error('Impossible de récupérer la source actuelle du site (HTTP '+r.status+')');
+      return r.text();
+    })
+    .then(function(sourceHtml){
+      var startMarker='/*__CV_DATA_START__*/';
+      var endMarker='/*__CV_DATA_END__*/';
+      var startIdx=sourceHtml.indexOf(startMarker);
+      var endIdx=sourceHtml.indexOf(endMarker);
+      if(startIdx===-1||endIdx===-1||endIdx<startIdx){
+        throw new Error('Marqueurs CV introuvables dans la page — mise à jour annulée par sécurité');
+      }
+      var replacement=startMarker+'\nconst DEFAULT_CV = '+JSON.stringify(cvData,null,2)+';\n';
+      var newHtml=sourceHtml.slice(0,startIdx)+replacement+sourceHtml.slice(endIdx);
+      ghXHR('GET',htmlApiUrl,null,function(err,res){
+        if(err){cb(err);return;}
+        var body={message:'Update index.html with latest CV data',content:btoa(unescape(encodeURIComponent(newHtml)))};
+        if(res.ok&&res.data&&res.data.sha)body.sha=res.data.sha;
+        ghXHR('PUT',htmlApiUrl,body,function(err2,res2){
+          if(err2){cb(err2);return;}
+          if(res2.ok){cb(null,res2.data.commit&&res2.data.commit.html_url);}
+          else{
+            var msg=res2.data&&res2.data.message?res2.data.message:'Erreur '+res2.status;
+            cb(new Error(msg));
+          }
+        });
+      });
+    })
+    .catch(function(e){cb(e);});
 }
 function copyGhSnippet(){
   var c=document.getElementById('gh-snippet');
