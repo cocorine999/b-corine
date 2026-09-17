@@ -1393,33 +1393,90 @@ document.addEventListener('keydown', function(e) {
 // ══════════════════════════════
 /*__CV_DATA_START__*/
 const DEFAULT_CV = {
-  name:'Corine D. BOCOGA',
-  title:'Software Engineer | Full Stack . Mobile Developer · DevOps',
-  email:'cocorine999@gmail.com',
-  phone:'(+229) 0162004867',
-  linkedin:'linkedin.com/in/b-corine',
-  github:'github.com/cocorine999',
-  location:'Godomey-Togoudo, Bénin',
-
-  summary:'Ingénieure logicielle et Cloud spécialisée dans le développement full-stack et l\'ingénierie DevOps avec plus de 5 ans d\'expérience. Experte dans la conception de solutions informatiques évolutives et maintenables, avec des compétences avancées en microservices, bases de données et gestion des infrastructures Cloud. Forte expertise en gestion de projet Agile et en conception d\'architectures systèmes scalables et résilientes. Co-fondatrice de HokwePay (fintech).',
-  skillsTech:'PHP/Laravel, FastAPI, JavaScript/Vue.js & Nuxt.js, Dart/Flutter, SQL, NoSQL, MySQL, PostgreSQL, MongoDB, Redis',
-  skillsTools:'Docker, Kubernetes, Terraform, Ansible, Jenkins, RabbitMQ, GitHub Actions, OpenTelemetry, ELK Stack, Prometheus, Grafana, GitOps, Keycloak + LDAP, Swagger, Postman, UML, Merise',
-  skillsSoft:'Gestion de projet Agile, Product Thinking, Architecture microservices, Esprit créatif & perfectionniste, Capacité à travailler sous pression, Leadership',
-  skillsLang:'Français (C2), Anglais (B2), Fon (C2)',
-  experiences:[
-    {title:'Co-fondatrice & Product Lead',company:'Hokwe Solutions Inc. (HokwePay)',period:'09/2023 — Présent',location:'Abomey-Calavi, Bénin',bullets:'Pilotage stratégique et technique de HokwePay — solution fintech de recouvrement locatif.\nRecherche utilisateurs terrain (interviews, empathy map), analyses SWOT et veille concurrentielle.\nConcept, Feature & Service Blueprint, parcours utilisateur et roadmap produit.\nDéveloppement du prototype et pilotage du MVP vers le Product-Market-Fit.'},
-    {title:'Ingénieure Logicielle Full Stack',company:'Célérité Holding',period:'05/2022 — Présent',location:'Akpakpa, Bénin',bullets:'Développement de la plateforme de suivi-évaluation (Programme Redevabilité) avec CI/CD et OpenAPI.\nConception et développement du SaaS d\'assurance Brokerslink (SOLID, revue de code, gestion des versions).\nAPI REST multi-plateforme (web, mobile, IoT) pour l\'évaluation qualité des services hospitaliers.\nModule comptabilité d\'un ERP d\'usine : architecture, SOLID, CI/CD, UAT.'},
-    {title:'Développeuse Back-end · Freelance',company:'SAHAN',period:'03/2022 — 07/2022',location:'Abomey-Calavi, Bénin',bullets:'Développement du SaaS de gestion hospitalière ASYCARE (SIG-H).\nModélisation du schéma relationnel et de l\'architecture logicielle.\nImplémentation SOLID, stack : Laravel, MySQL, Nginx, Linux.'},
-    {title:'Développeuse Full Stack',company:'CFA Empire',period:'09/2021 — 03/2022',location:'Abomey-Calavi, Bénin',bullets:'Conception et livraison d\'un système RH complet (web + mobile).\nApplication de messagerie interne mobile et plateforme e-commerce WordPress.\nTests qualité et lancement réussi.'},
-    {title:'Développeuse Mobile · Bénévole',company:'SEPT',period:'01/2022 — 07/2023',location:'Bénin',bullets:'App mobile Agri-Tech (Flutter/Dart) : météo agricole, irrigation à distance, détection de maladies crops via Deep Learning.\nIntégration Hive (local) et AWS (cloud).'},
-    {title:'Développeuse Web · Freelance',company:'AC-GROUPE',period:'01/2020 — 03/2024',location:'Abomey-Calavi, Bénin',bullets:'Blog informatif, outil d\'emailing promotionnel en masse.\nDéploiement, maintenance et supervision de projets IT.\nRédaction d\'un guide complet de formation en développement web.'},
-    {title:'Développeuse Backend & Mobile · Freelance',company:'MMS',period:'10/2019 — 11/2020',location:'Abomey-Calavi, Bénin',bullets:'Direction du développement de EH WLIN MI — app mobile d\'assurance décès.\nConception et implémentation d\'API RESTful pour la communication mobile-backend.'},
+  "name": "Corine D. BOCOGA",
+  "title": "Software Engineer | Full Stack . Mobile Developer · DevOps",
+  "email": "cocorine999@gmail.com",
+  "phone": "(+229) 0162004867",
+  "linkedin": "linkedin.com/in/b-corine",
+  "github": "github.com/cocorine999",
+  "location": "Godomey-Togoudo, Bénin",
+  "summary": "Ingénieure logicielle et Cloud spécialisée dans le développement full-stack et l'ingénierie DevOps avec plus de 5 ans d'expérience. Experte dans la conception de solutions informatiques évolutives et maintenables, avec des compétences avancées en microservices, bases de données et gestion des infrastructures Cloud. Forte expertise en gestion de projet Agile et en conception d'architectures systèmes scalables et résilientes. Co-fondatrice de HokwePay (fintech).",
+  "skillsTech": "PHP/Laravel, FastAPI, JavaScript/Vue.js & Nuxt.js, Dart/Flutter, SQL, NoSQL, MySQL, PostgreSQL, MongoDB, Redis",
+  "skillsTools": "Docker, Kubernetes, Terraform, Ansible, Jenkins, RabbitMQ, GitHub Actions, OpenTelemetry, ELK Stack, Prometheus, Grafana, GitOps, Keycloak + LDAP, Swagger, Postman, UML, Merise",
+  "skillsSoft": "Gestion de projet Agile, Product Thinking, Architecture microservices, Esprit créatif & perfectionniste, Capacité à travailler sous pression, Leadership",
+  "skillsLang": "Français (C2), Anglais (B2), Fon (C2)",
+  "experiences": [
+    {
+      "title": "Co-fondatrice & Product Lead",
+      "company": "Hokwe Solutions Inc. (HokwePay)",
+      "period": "09/2023 — Présent",
+      "location": "Abomey-Calavi, Bénin",
+      "bullets": "Pilotage stratégique et technique de HokwePay — solution fintech de recouvrement locatif.\nRecherche utilisateurs terrain (interviews, empathy map), analyses SWOT et veille concurrentielle.\nConcept, Feature & Service Blueprint, parcours utilisateur et roadmap produit.\nDéveloppement du prototype et pilotage du MVP vers le Product-Market-Fit."
+    },
+    {
+      "title": "Ingénieure Logicielle Full Stack",
+      "company": "Célérité Holding",
+      "period": "05/2022 — Présent",
+      "location": "Akpakpa, Bénin",
+      "bullets": "Développement de la plateforme de suivi-évaluation (Programme Redevabilité) avec CI/CD et OpenAPI.\nConception et développement du SaaS d'assurance Brokerslink (SOLID, revue de code, gestion des versions).\nAPI REST multi-plateforme (web, mobile, IoT) pour l'évaluation qualité des services hospitaliers.\nModule comptabilité d'un ERP d'usine : architecture, SOLID, CI/CD, UAT."
+    },
+    {
+      "title": "Développeuse Back-end · Freelance",
+      "company": "SAHAN",
+      "period": "03/2022 — 07/2022",
+      "location": "Abomey-Calavi, Bénin",
+      "bullets": "Développement du SaaS de gestion hospitalière ASYCARE (SIG-H).\nModélisation du schéma relationnel et de l'architecture logicielle.\nImplémentation SOLID, stack : Laravel, MySQL, Nginx, Linux."
+    },
+    {
+      "title": "Développeuse Full Stack",
+      "company": "CFA Empire",
+      "period": "09/2021 — 03/2022",
+      "location": "Abomey-Calavi, Bénin",
+      "bullets": "Conception et livraison d'un système RH complet (web + mobile).\nApplication de messagerie interne mobile et plateforme e-commerce WordPress.\nTests qualité et lancement réussi."
+    },
+    {
+      "title": "Développeuse Mobile · Bénévole",
+      "company": "SEPT",
+      "period": "01/2022 — 07/2023",
+      "location": "Bénin",
+      "bullets": "App mobile Agri-Tech (Flutter/Dart) : météo agricole, irrigation à distance, détection de maladies crops via Deep Learning.\nIntégration Hive (local) et AWS (cloud)."
+    },
+    {
+      "title": "Développeuse Web · Freelance",
+      "company": "AC-GROUPE",
+      "period": "01/2020 — 03/2024",
+      "location": "Abomey-Calavi, Bénin",
+      "bullets": "Blog informatif, outil d'emailing promotionnel en masse.\nDéploiement, maintenance et supervision de projets IT.\nRédaction d'un guide complet de formation en développement web."
+    },
+    {
+      "title": "Développeuse Backend & Mobile · Freelance",
+      "company": "MMS",
+      "period": "10/2019 — 11/2020",
+      "location": "Abomey-Calavi, Bénin",
+      "bullets": "Direction du développement de EH WLIN MI — app mobile d'assurance décès.\nConception et implémentation d'API RESTful pour la communication mobile-backend."
+    }
   ],
-  educations:[
-    {school:'Udacity via ALX · En ligne',degree:'AWS Certified Cloud Developer',year:'2022'},
-    {school:'ALX Africa · Holberton School',degree:'Software Engineering',year:'2022'},
-    {school:'IFRI · Université d\'Abomey-Calavi',degree:'B.S. Génie Logiciel',year:'2016 — 2019'},
-    {school:'Lycée Technique Coulibaly · Cotonou',degree:'DT — Installation & Maintenance Informatique',year:'2013 — 2016'},
+  "educations": [
+    {
+      "school": "Udacity via ALX · En ligne",
+      "degree": "AWS Certified Cloud Developer",
+      "year": "2022"
+    },
+    {
+      "school": "ALX Africa · Holberton School",
+      "degree": "Software Engineering",
+      "year": "2022"
+    },
+    {
+      "school": "IFRI · Université d'Abomey-Calavi",
+      "degree": "B.S. Génie Logiciel",
+      "year": "2016 — 2019"
+    },
+    {
+      "school": "Lycée Technique Coulibaly · Cotonou",
+      "degree": "DT — Installation & Maintenance Informatique",
+      "year": "2013 — 2016"
+    }
   ]
 };
 /*__CV_DATA_END__*/
